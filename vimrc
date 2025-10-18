@@ -1,7 +1,6 @@
 "Plugins
 call plug#begin()
 "Pretty stuff
-"Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
