@@ -20,6 +20,9 @@ source ~/.aliases
 export PATH=~/scripts:$PATH
 export PATH=~/.bin:$PATH
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # Basics
 export EDITOR=vim
 setopt prompt_subst
@@ -32,7 +35,6 @@ zstyle ':vcs_info:git:*' formats ' %F{blue}[%b%F{red}%u%F{yellow}%c%f]'
 zstyle ':vcs_info:git:*' actionformats ' %F{blue}[%b|%a%F{red}%u%F{yellow}%c%f]'
 precmd() { vcs_info }
 
-PROMPT='%F{green}%n%f@%F{cyan}%m%f %F{magenta}%~%f${vcs_info_msg_0_} %# '
 #
 # # GNU ls color (Linux); fallback for macOS
 if command -v dircolors >/dev/null 2>&1; then
@@ -95,7 +97,10 @@ alias fgrep='fgrep --color=auto'
 #           umask 022
 
 
+# Doom?
+export PATH=$PATH:~/.config/emacs/bin
 
+PROMPT='%F{green}%n%f@%F{cyan}%m%f %F{magenta}%~%f${vcs_info_msg_0_} %# '
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
@@ -112,3 +117,26 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 
+
+# >>> mamba initialize >>>
+# !! Contents within this block are managed by 'mamba shell init' !!
+export MAMBA_EXE='/home/pixie/miniforge3/bin/mamba';
+export MAMBA_ROOT_PREFIX='/home/pixie/miniforge3';
+__mamba_setup="$("$MAMBA_EXE" shell hook --shell zsh --root-prefix "$MAMBA_ROOT_PREFIX" 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__mamba_setup"
+else
+    alias mamba="$MAMBA_EXE"  # Fallback on help from mamba activate
+fi
+unset __mamba_setup
+# <<< mamba initialize <<<
+
+[ -f "/home/pixie/.ghcup/env" ] && . "/home/pixie/.ghcup/env" # ghcup-env
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/pixie/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
